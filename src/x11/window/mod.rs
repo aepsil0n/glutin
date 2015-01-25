@@ -670,7 +670,7 @@ impl Window {
         }
     }
 
-    pub fn grab_cursor(&self) {
+    pub fn grab_cursor(&self) -> Result<(), String> {
         unsafe {
             match ffi::XGrabPointer(
                 self.x.display, self.x.window, false,
@@ -682,8 +682,11 @@ impl Window {
                 ffi::GrabModeAsync, ffi::GrabModeAsync,
                 self.x.window, 0, ffi::CurrentTime
             ) {
-                ffi::GrabSuccess => (),
-                _ => panic!("error grabbing window"),
+                ffi::GrabSuccess => Ok(()),
+                ffi::AlreadyGrabbed | ffi::GrabInvalidTime |
+                ffi::GrabNotViewable | ffi::GrabFrozen
+                    => Err("cursor could not be grabbed".to_string()),
+                _ => unreachable!(),
             }
         }
     }

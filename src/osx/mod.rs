@@ -556,7 +556,7 @@ impl Window {
         unimplemented!()
     }
 
-    pub fn grab_cursor(&self) {
+    pub fn grab_cursor(&self) -> Result<(), String> {
         unimplemented!()
     }
 

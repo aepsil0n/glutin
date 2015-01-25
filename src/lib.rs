@@ -636,10 +636,14 @@ impl Window {
         self.window.set_cursor(cursor);
     }
 
-    /// Grabs the mouse cursor.
+    /// Grabs the mouse cursor. The cursor's motion will be confined to this
+    /// window and the window has exclusive access to further events regarding
+    /// the cursor.
+    /// Fails if it is not possible to grab the window for some reason, e.g.
+    /// when another window has already done so.
     /// Has no effect on Android.
-    pub fn grab_cursor(&self) {
-        self.window.grab_cursor();
+    pub fn grab_cursor(&self) -> Result<(), String> {
+        self.window.grab_cursor()
     }
 
     /// Release a previously grabbed mouse cursor.

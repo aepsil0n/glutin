@@ -290,7 +290,7 @@ impl Window {
     pub fn set_cursor(&self, _: MouseCursor) {
     }
 
-    pub fn grab_cursor(&self) {}
+    pub fn grab_cursor(&self) -> Result<(), String> { Ok(()) }
 
     pub fn ungrab_cursor(&self) {}
 
