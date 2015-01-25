@@ -556,6 +556,14 @@ impl Window {
         unimplemented!()
     }
 
+    pub fn grab_cursor(&self) {
+        unimplemented!()
+    }
+
+    pub fn ungrab_cursor(&self) {
+        unimplemented!()
+    }
+
     pub fn hidpi_factor(&self) -> f32 {
         unsafe {
             self.window.backingScaleFactor() as f32

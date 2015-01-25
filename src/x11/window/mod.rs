@@ -670,6 +670,30 @@ impl Window {
         }
     }
 
+    pub fn grab_cursor(&self) {
+        unsafe {
+            match ffi::XGrabPointer(
+                self.x.display, self.x.window, false,
+                ffi::ButtonPressMask | ffi::ButtonReleaseMask | ffi::EnterWindowMask |
+                ffi::LeaveWindowMask | ffi::PointerMotionMask | ffi::PointerMotionHintMask |
+                ffi::Button1MotionMask | ffi::Button2MotionMask | ffi::Button3MotionMask |
+                ffi::Button4MotionMask | ffi::Button5MotionMask | ffi::ButtonMotionMask |
+                ffi::KeymapStateMask,
+                ffi::GrabModeAsync, ffi::GrabModeAsync,
+                self.x.window, 0, ffi::CurrentTime
+            ) {
+                ffi::GrabSuccess => (),
+                _ => panic!("error grabbing window"),
+            }
+        }
+    }
+
+    pub fn ungrab_cursor(&self) {
+        unsafe {
+            ffi::XUngrabPointer(self.x.display, ffi::CurrentTime);
+        }
+    }
+
     pub fn hidpi_factor(&self) -> f32 {
         1.0
     }

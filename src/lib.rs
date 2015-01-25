@@ -636,6 +636,16 @@ impl Window {
         self.window.set_cursor(cursor);
     }
 
+    /// Grabs the mouse cursor.
+    pub fn grab_cursor(&self) {
+        self.window.grab_cursor();
+    }
+
+    /// Release a previously grabbed mouse cursor.
+    pub fn ungrab_cursor(&self) {
+        self.window.ungrab_cursor();
+    }
+
     /// Returns the ratio between the backing framebuffer resolution and the
     /// window size in screen pixels. This is typically one for a normal display
     /// and two for a retina display.
