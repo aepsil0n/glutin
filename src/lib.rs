@@ -637,6 +637,7 @@ impl Window {
     }
 
     /// Grabs the mouse cursor.
+    /// Has no effect on Android.
     pub fn grab_cursor(&self) {
         self.window.grab_cursor();
     }
